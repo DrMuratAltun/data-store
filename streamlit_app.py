@@ -11,44 +11,35 @@ from streamlit_extras.dataframe_explorer import dataframe_explorer
 
 st.set_page_config(page_title="Dashboard",page_icon="🌍",layout="wide")
 st.header("Etsy Turkish Daily Sales Dashboard")
-df=pd.read_excel("data_store.xlsx")
-# 'date' sütununu düşürmek için
-df3 = df.drop(columns=['date'])
-
-
-#streamlit theme=none
-theme_plotly = None 
+df = pd.read_excel("data_store.xlsx")
 
 # load CSS Style
-with open('style.css')as f:
-    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html = True)
-
+with open('style.css') as f:
+    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 st.sidebar.image("logo2.png")
-#filter date to view data
+# Filter date to view data
 with st.sidebar:
- st.title("Select Date Range")
- start_date=st.date_input(label="Start Date")
+    st.title("Select Date Range")
+    start_date = st.date_input(label="Start Date")
+    end_date = st.date_input(label="End Date")
+    
+st.error("Store Sales between [" + str(start_date) + "] and [" + str(end_date) + "]")
 
-with st.sidebar:
- end_date=st.date_input(label="End Date")
-st.error("Store Sales between[ "+str(start_date)+"] and ["+str(end_date)+"]")
+# Filter DataFrame by selected date range
+df_filtered = df[(df['date'] >= pd.to_datetime(start_date)) & (df['date'] <= pd.to_datetime(end_date))]
 
-#compare date
-df2 = df[(df['date'] >= str(start_date)) & (df['date'] <= str(end_date))]
-
-
-# Sidebar'da kolonları seçmek için multiselect widget'ı
+# Sidebar'da mağazaları seçmek için multiselect widget'ı
 with st.sidebar:
     st.header("Store Filter")
-    selected_columns = st.multiselect(
-        "Filter Department",
-        options=df3.columns.tolist(),
-        default=df3.columns.tolist()
+    selected_stores = st.multiselect(
+        "Select Stores",
+        options=df_filtered['store'].unique(),
+        default=df_filtered['store'].unique()
     )
 
 # Seçilen mağazalara göre DataFrame'i filtreleme
-df_selection = df2[df2['store'].isin(selected_stores)]
+df_selection = df_filtered[df_filtered['store'].isin(selected_stores)]
 
 # Tarihlere göre satışları toplama
 sales_by_date = df_selection.groupby('date')['sales'].sum().reset_index()
