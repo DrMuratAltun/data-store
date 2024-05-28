@@ -37,5 +37,3 @@ st.dataframe(df2)
 
 with st.sidebar("Filter Excel Dataset"):
  filtered_df = dataframe_explorer(df2, case=False)
-
-)
