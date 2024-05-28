@@ -32,3 +32,4 @@ st.error("Business Metrics between[ "+str(start_date)+"] and ["+str(end_date)+"]
 
 #compare date
 df2 = df[(df['Date'] >= str(start_date)) & (df['Date'] <= str(end_date))]
+st.dataframe(df2)
