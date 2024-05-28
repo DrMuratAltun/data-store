@@ -12,7 +12,9 @@ from streamlit_extras.dataframe_explorer import dataframe_explorer
 st.set_page_config(page_title="Dashboard",page_icon="🌍",layout="wide")
 st.header("Etsy Turkish Daily Sales Dashboard")
 df=pd.read_excel("data_store.xlsx")
-df3=df.drop["date"]
+# 'date' sütununu düşürmek için
+df3 = df.drop(columns=['date'])
+
 
 #streamlit theme=none
 theme_plotly = None 
