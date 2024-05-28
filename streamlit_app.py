@@ -12,6 +12,7 @@ from streamlit_extras.dataframe_explorer import dataframe_explorer
 st.set_page_config(page_title="Dashboard",page_icon="🌍",layout="wide")
 st.header("Etsy Turkish Daily Sales Dashboard")
 df=pd.read_excel("data_store.xlsx")
+df3=df.drop["date"]
 
 #streamlit theme=none
 theme_plotly = None 
@@ -36,4 +37,4 @@ df2 = df[(df['date'] >= str(start_date)) & (df['date'] <= str(end_date))]
 st.dataframe(df2)
 
 with st.sidebar.header("Store Filter"):
- store=st.sidebar.multiselect(dataframe_explorer(df2, case=False))
+ store=st.sidebar.multiselect(df3)
