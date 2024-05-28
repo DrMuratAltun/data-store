@@ -77,5 +77,12 @@ fig_line.update_layout(title='Daily Sales by Store', xaxis_title='Date', yaxis_t
 # Grafiği Streamlit ile gösterme
 st.plotly_chart(fig_line)
 
+# Her mağazanın toplam satışlarını içeren pastayı oluşturma
+fig_pie = px.pie(total_sales, values='total_sales', names='store', title='Total Sales Distribution by Store')
+
+# Grafiği Streamlit ile gösterme
+st.plotly_chart(fig_pie)
+
+
 # Filtrelenmiş DataFrame'i gösterme
 st.write("Filtered DataFrame:", df_selection)
