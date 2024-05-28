@@ -42,4 +42,4 @@ with st.sidebar.header("Store Filter"):
  store=st.sidebar.multiselect("Filter Department",
      options=df3.unique(),
      default=df3.unique(),
-))
+)
