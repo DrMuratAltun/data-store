@@ -35,5 +35,5 @@ st.error("Business Metrics between[ "+str(start_date)+"] and ["+str(end_date)+"]
 df2 = df[(df['date'] >= str(start_date)) & (df['date'] <= str(end_date))]
 st.dataframe(df2)
 
-with st.sidebar("Filter Excel Dataset"):
+with st.sidebar:
  filtered_df = dataframe_explorer(df2, case=False)
