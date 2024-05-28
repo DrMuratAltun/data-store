@@ -1,12 +1,11 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objs as go
 from streamlit_option_menu import option_menu
 from numerize.numerize import numerize
 import time
 from streamlit_extras.metric_cards import style_metric_cards
-st.set_option('deprecation.showPyplotGlobalUse', False)
-import plotly.graph_objs as go
 from streamlit_extras.dataframe_explorer import dataframe_explorer
 
 # Streamlit sayfa ayarları
@@ -15,7 +14,7 @@ st.header("Etsy Turkish Daily Sales Dashboard")
 
 # Excel dosyasını yükleme
 
-df = pd.read_excel("data_store.xlsx")
+df = pd.read_excel("data_store")
 
 # CSS stili yükleme
 with open('style.css') as f:
@@ -45,17 +44,32 @@ with st.sidebar:
     )
 
 # Seçilen mağazalara göre DataFrame'i filtreleme
-df_selection = df_filtered[selected_stores]
+df_selection = df_filtered[['date'] + selected_stores]
 
 # Her mağazanın toplam satışlarını hesaplama
-total_sales = df_selection.sum().reset_index()
+total_sales = df_selection[selected_stores].sum().reset_index()
 total_sales.columns = ['store', 'total_sales']
 
 # Bar grafiği oluşturma
-fig = px.bar(total_sales, x='store', y='total_sales', title='Total Sales by Store')
+fig_bar = px.bar(total_sales, x='store', y='total_sales', title='Total Sales by Store')
+fig_bar.update_traces(text=total_sales['total_sales'], textposition='outside')
 
 # Grafiği Streamlit ile gösterme
-st.plotly_chart(fig)
+st.plotly_chart(fig_bar)
+
+# Seçilen mağazaların günlük satışlarını toplama
+daily_sales = df_selection.groupby('date')[selected_stores].sum().reset_index()
+
+# Çizgi grafiği oluşturma
+fig_line = go.Figure()
+
+for store in selected_stores:
+    fig_line.add_trace(go.Scatter(x=daily_sales['date'], y=daily_sales[store], mode='lines', name=store))
+
+fig_line.update_layout(title='Daily Sales by Store', xaxis_title='Date', yaxis_title='Sales')
+
+# Grafiği Streamlit ile gösterme
+st.plotly_chart(fig_line)
 
 # Filtrelenmiş DataFrame'i gösterme
 st.write("Filtered DataFrame:", df_selection)
