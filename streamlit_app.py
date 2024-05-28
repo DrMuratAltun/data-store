@@ -48,7 +48,7 @@ with st.sidebar:
     )
 
 # Seçilen mağazalara göre DataFrame'i filtreleme
-df_selection = df_filtered[df_filtered['store'].isin(selected_stores)]
+df_selection = df2[df2['store'].isin(selected_stores)]
 
 # Tarihlere göre satışları toplama
 sales_by_date = df_selection.groupby('date')['sales'].sum().reset_index()
