@@ -11,7 +11,7 @@ import plotly.graph_objs as go
 st.set_page_config(page_title="Dashboard",page_icon="🌍",layout="wide")
 st.header("Etsy Turkish Daily Sales Dashboard")
 df=pd.read_excel("data_store.xlsx")
-st.dataframe(df,use_container_width=True)
+
 #streamlit theme=none
 theme_plotly = None 
 
@@ -33,3 +33,6 @@ st.error("Business Metrics between[ "+str(start_date)+"] and ["+str(end_date)+"]
 #compare date
 df2 = df[(df['date'] >= str(start_date)) & (df['date'] <= str(end_date))]
 st.dataframe(df2)
+with st.expander("Filter Excel Dataset"):
+ filtered_df = dataframe_explorer(df2, case=False)
+ st.dataframe(filtered_df, use_container_width=True)
