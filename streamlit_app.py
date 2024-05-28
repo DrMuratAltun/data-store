@@ -38,11 +38,17 @@ st.error("Business Metrics between[ "+str(start_date)+"] and ["+str(end_date)+"]
 df2 = df[(df['date'] >= str(start_date)) & (df['date'] <= str(end_date))]
 st.dataframe(df2)
 
-with st.sidebar.header("Store Filter"):
- store=st.sidebar.multiselect("Filter Department",
-     options=df3,
-     default=df3,
-)
-df_selection=df.query(
-    "df3==@store"
-)
+# Sidebar'da kolonları seçmek için multiselect widget'ı
+with st.sidebar:
+    st.header("Store Filter")
+    selected_columns = st.multiselect(
+        "Filter Department",
+        options=df3.columns.tolist(),
+        default=df3.columns.tolist()
+    )
+
+# Seçilen kolonlara göre DataFrame'i filtreleme
+df_selection = df3[selected_columns]
+
+# Filtrelenmiş DataFrame'i gösterme
+st.write("Filtered DataFrame:", df_selection)
