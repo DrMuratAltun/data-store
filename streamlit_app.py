@@ -10,7 +10,7 @@ from streamlit_extras.dataframe_explorer import dataframe_explorer
 
 # Streamlit sayfa ayarları
 st.set_page_config(page_title="Dashboard", page_icon="🌍", layout="wide")
-st.header("Etsy Turkish Daily Sales Dashboard")
+st.header("Etsy Turkish Lamp Category Daily Sales Dashboard")
 
 # Excel dosyasını yükleme
 df = pd.read_excel("data_store.xlsx")
