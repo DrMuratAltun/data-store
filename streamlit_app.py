@@ -12,6 +12,7 @@ from streamlit_extras.dataframe_explorer import dataframe_explorer
 st.set_page_config(page_title="Dashboard",page_icon="🌍",layout="wide")
 st.header("Etsy Turkish Daily Sales Dashboard")
 df = pd.read_excel("data_store.xlsx")
+df3 = df.drop(columns=['date'])
 
 # load CSS Style
 with open('style.css') as f:
