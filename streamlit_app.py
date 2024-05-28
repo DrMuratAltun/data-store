@@ -32,11 +32,11 @@ with st.sidebar:
 
 with st.sidebar:
  end_date=st.date_input(label="End Date")
-st.error("Business Metrics between[ "+str(start_date)+"] and ["+str(end_date)+"]")
+st.error("Store Sales between[ "+str(start_date)+"] and ["+str(end_date)+"]")
 
 #compare date
 df2 = df[(df['date'] >= str(start_date)) & (df['date'] <= str(end_date))]
-st.dataframe(df2)
+
 
 # Sidebar'da kolonları seçmek için multiselect widget'ı
 with st.sidebar:
@@ -47,8 +47,17 @@ with st.sidebar:
         default=df3.columns.tolist()
     )
 
-# Seçilen kolonlara göre DataFrame'i filtreleme
-df_selection = df3[selected_columns]
+# Seçilen mağazalara göre DataFrame'i filtreleme
+df_selection = df_filtered[df_filtered['store'].isin(selected_stores)]
 
-# Filtrelenmiş DataFrame'i gösterme
+# Tarihlere göre satışları toplama
+sales_by_date = df_selection.groupby('date')['sales'].sum().reset_index()
+
+# Bar grafiği oluşturma
+fig = px.bar(sales_by_date, x='date', y='sales', title='Total Sales by Date')
+
+# Grafiği Streamlit ile gösterme
+st.plotly_chart(fig)
+
+# DataFrame'i gösterme
 st.write("Filtered DataFrame:", df_selection)
