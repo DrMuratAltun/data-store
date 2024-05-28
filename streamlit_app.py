@@ -30,13 +30,15 @@ st.error("Store Sales between [" + str(start_date) + "] and [" + str(end_date) +
 df_filtered = df[(df['date'] >= pd.to_datetime(start_date)) & (df['date'] <= pd.to_datetime(end_date))]
 
 # Sidebar'da mağazaları seçmek için multiselect widget'ı
+# Sidebar'da kolonları seçmek için multiselect widget'ı
 with st.sidebar:
     st.header("Store Filter")
-    selected_stores = st.multiselect(
-        "Select Stores",
-        options=df_filtered['store'].unique(),
-        default=df_filtered['store'].unique()
+    selected_columns = st.multiselect(
+        "Filter Department",
+        options=df3.columns.tolist(),
+        default=df3.columns.tolist()
     )
+
 
 # Seçilen mağazalara göre DataFrame'i filtreleme
 df_selection = df_filtered[df_filtered['store'].isin(selected_stores)]
