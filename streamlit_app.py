@@ -13,7 +13,6 @@ st.set_page_config(page_title="Dashboard", page_icon="🌍", layout="wide")
 st.header("Etsy Turkish Daily Sales Dashboard")
 
 # Excel dosyasını yükleme
-
 df = pd.read_excel("data_store.xlsx")
 
 # CSS stili yükleme
@@ -53,6 +52,13 @@ total_sales.columns = ['store', 'total_sales']
 # Bar grafiği oluşturma
 fig_bar = px.bar(total_sales, x='store', y='total_sales', title='Total Sales by Store')
 fig_bar.update_traces(text=total_sales['total_sales'], textposition='outside')
+
+# Y eksenini ayarlama (görünürlüğü artırmak için)
+fig_bar.update_layout(
+    yaxis=dict(
+        range=[0, total_sales['total_sales'].max() * 1.1]  # 10% padding
+    )
+)
 
 # Grafiği Streamlit ile gösterme
 st.plotly_chart(fig_bar)
