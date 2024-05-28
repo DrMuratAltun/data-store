@@ -14,7 +14,7 @@ st.header("Etsy Turkish Daily Sales Dashboard")
 
 # Excel dosyasını yükleme
 
-df = pd.read_excel("data_store")
+df = pd.read_excel("data_store.xlsx")
 
 # CSS stili yükleme
 with open('style.css') as f:
