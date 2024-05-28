@@ -7,6 +7,7 @@ import time
 from streamlit_extras.metric_cards import style_metric_cards
 st.set_option('deprecation.showPyplotGlobalUse', False)
 import plotly.graph_objs as go
+from streamlit_extras.dataframe_explorer import dataframe_explorer
 
 st.set_page_config(page_title="Dashboard",page_icon="🌍",layout="wide")
 st.header("Etsy Turkish Daily Sales Dashboard")
