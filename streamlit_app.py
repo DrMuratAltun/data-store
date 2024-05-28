@@ -35,5 +35,12 @@ st.error("Business Metrics between[ "+str(start_date)+"] and ["+str(end_date)+"]
 df2 = df[(df['date'] >= str(start_date)) & (df['date'] <= str(end_date))]
 st.dataframe(df2)
 
-with st.sidebar:
- filtered_df = dataframe_explorer(df2, case=False)
+with st.sidebar.header("Store Filter"):
+ store=st.sidebar.multiselect(
+    "Filter Store",
+     options=df["DervishHandicrafts","MosaicLampTurkey","TurkishLampBazaar","MozaistLighting","mosaiclampdesign","KARALPMOSAICLAMP","BEZENSTORES","Asylove","Mosland Home","Grmoonde"].unique(),
+     default=df["DervishHandicrafts","MosaicLampTurkey","TurkishLampBazaar","MozaistLighting","mosaiclampdesign","KARALPMOSAICLAMP","BEZENSTORES","Asylove","Mosland Home","Grmoonde"].unique(),
+ )
+df_selection=df.query(
+    "Department==@department & Country==@country & BusinessUnit ==@businessunit"
+)
