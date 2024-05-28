@@ -19,11 +19,11 @@ theme_plotly = None
 with open('style.css')as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html = True)
 
-UI()
+
 #load dataset
 df=pd.read_csv('data.csv')
 
-st.sidebar.image("images/logo2.png")
+st.sidebar.image("logo2.png")
 #filter date to view data
 with st.sidebar:
  st.title("Select Date Range")
