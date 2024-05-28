@@ -43,3 +43,6 @@ with st.sidebar.header("Store Filter"):
      options=df3.unique(),
      default=df3.unique(),
 )
+df_selection=df.query(
+    "df3==@store"
+)
