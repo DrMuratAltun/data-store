@@ -39,4 +39,7 @@ df2 = df[(df['date'] >= str(start_date)) & (df['date'] <= str(end_date))]
 st.dataframe(df2)
 
 with st.sidebar.header("Store Filter"):
- store=st.sidebar.multiselect(df3)
+ store=st.sidebar.multiselect("Filter Department",
+     options=df3.unique(),
+     default=df3.unique(),
+))
