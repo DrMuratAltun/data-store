@@ -42,6 +42,5 @@ with st.sidebar.header("Store Filter"):
      default=df["DervishHandicrafts","MosaicLampTurkey","TurkishLampBazaar","MozaistLighting","mosaiclampdesign","KARALPMOSAICLAMP","BEZENSTORES","Asylove","MoslandHome","Grmoonde"].unique(),
  )
 df_selection=df.query(
-    "DervishHandicrafts==@store & MosaicLampTurkey==@store & TurkishLampBazaar==@store & MozaistLighting==@store & 
-     mosaiclampdesign==@store & KARALPMOSAICLAMP==@store & BEZENSTORES==@store & Asylove==@store & MoslandHome==@store & Grmoonde==@store "
+    "DervishHandicrafts==@store & MosaicLampTurkey==@store & TurkishLampBazaar==@store & MozaistLighting==@store & mosaiclampdesign==@store & KARALPMOSAICLAMP==@store & BEZENSTORES==@store & Asylove==@store & MoslandHome==@store & Grmoonde==@store "
 )
