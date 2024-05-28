@@ -45,16 +45,14 @@ with st.sidebar:
     )
 
 # Seçilen mağazalara göre DataFrame'i filtreleme
-df_selection = df_filtered[['date'] + selected_stores]
+df_selection = df_filtered[selected_stores]
 
-# Seçilen mağazaların toplam satışlarını hesaplama
-df_selection['total_sales'] = df_selection[selected_stores].sum(axis=1)
-
-# Tarihlere göre toplam satışları toplama
-sales_by_date = df_selection.groupby('date')['total_sales'].sum().reset_index()
+# Her mağazanın toplam satışlarını hesaplama
+total_sales = df_selection.sum().reset_index()
+total_sales.columns = ['store', 'total_sales']
 
 # Bar grafiği oluşturma
-fig = px.bar(sales_by_date, x='date', y='total_sales', title='Total Sales by Date')
+fig = px.bar(total_sales, x='store', y='total_sales', title='Total Sales by Store')
 
 # Grafiği Streamlit ile gösterme
 st.plotly_chart(fig)
