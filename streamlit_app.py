@@ -36,5 +36,4 @@ df2 = df[(df['date'] >= str(start_date)) & (df['date'] <= str(end_date))]
 st.dataframe(df2)
 
 with st.sidebar.header("Store Filter"):
- store=st.sidebar.multiselect
-    filtered_df = dataframe_explorer(df2, case=False)
+ store=st.sidebar.multiselect(dataframe_explorer(df2, case=False))
