@@ -38,9 +38,10 @@ st.dataframe(df2)
 with st.sidebar.header("Store Filter"):
  store=st.sidebar.multiselect(
     "Filter Store",
-     options=df["DervishHandicrafts","MosaicLampTurkey","TurkishLampBazaar","MozaistLighting","mosaiclampdesign","KARALPMOSAICLAMP","BEZENSTORES","Asylove","Mosland Home","Grmoonde"].unique(),
-     default=df["DervishHandicrafts","MosaicLampTurkey","TurkishLampBazaar","MozaistLighting","mosaiclampdesign","KARALPMOSAICLAMP","BEZENSTORES","Asylove","Mosland Home","Grmoonde"].unique(),
+     options=df["DervishHandicrafts","MosaicLampTurkey","TurkishLampBazaar","MozaistLighting","mosaiclampdesign","KARALPMOSAICLAMP","BEZENSTORES","Asylove","MoslandHome","Grmoonde"].unique(),
+     default=df["DervishHandicrafts","MosaicLampTurkey","TurkishLampBazaar","MozaistLighting","mosaiclampdesign","KARALPMOSAICLAMP","BEZENSTORES","Asylove","MoslandHome","Grmoonde"].unique(),
  )
 df_selection=df.query(
-    "Department==@department & Country==@country & BusinessUnit ==@businessunit"
+    "DervishHandicrafts==@store & MosaicLampTurkey==@store & TurkishLampBazaar==@store & MozaistLighting==@store & 
+     mosaiclampdesign==@store & KARALPMOSAICLAMP==@store & BEZENSTORES==@store & Asylove==@store & MoslandHome==@store & Grmoonde==@store "
 )
